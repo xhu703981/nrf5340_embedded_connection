@@ -1,0 +1,472 @@
+The target system is: Generic - 4.0.99 - arm
+The host system is: Windows - 10.0.26100 - AMD64
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: C:/ncs/toolchains/0b393f9e1b/opt/zephyr-sdk/arm-zephyr-eabi/bin/arm-zephyr-eabi-gcc.exe 
+Build flags: 
+Id flags: -c 
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.o"
+
+The C compiler identification is GNU, found in "C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/3.21.0/CompilerIdC/CMakeCCompilerId.o"
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler: C:/ncs/toolchains/0b393f9e1b/opt/zephyr-sdk/arm-zephyr-eabi/bin/arm-zephyr-eabi-gcc.exe 
+Build flags: 
+Id flags: -c 
+
+The output was:
+0
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.o"
+
+The CXX compiler identification is GNU, found in "C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/3.21.0/CompilerIdCXX/CMakeCXXCompilerId.o"
+
+Checking whether the ASM compiler is GNU using "--version" matched "(GNU assembler)|(GCC)|(Free Software Foundation)":
+arm-zephyr-eabi-gcc.exe (Zephyr SDK 0.17.0) 12.2.0
+Copyright (C) 2022 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+Determining if files stdatomic.h exist passed with the following output:
+Change Dir: C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ncs/toolchains/0b393f9e1b/opt/bin/ninja.exe cmTC_61e01 && [1/2] Building C object CMakeFiles/cmTC_61e01.dir/HAVE_STDATOMIC_H.c.obj
+[2/2] Linking C executable cmTC_61e01
+arm-zephyr-eabi-gcc.exe: warning: CMakeFiles/cmTC_61e01.dir/HAVE_STDATOMIC_H.c.obj: linker input file unused because linking not done
+
+
+
+Determining if files fcntl.h exist passed with the following output:
+Change Dir: C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ncs/toolchains/0b393f9e1b/opt/bin/ninja.exe cmTC_21154 && [1/2] Building C object CMakeFiles/cmTC_21154.dir/HAVE_FCNTL_H.c.obj
+[2/2] Linking C executable cmTC_21154
+arm-zephyr-eabi-gcc.exe: warning: CMakeFiles/cmTC_21154.dir/HAVE_FCNTL_H.c.obj: linker input file unused because linking not done
+
+
+
+Performing C SOURCE FILE Test check_C__c__nostartfiles__nostdlib__isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include___isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include_fixed___Wl___unresolved_symbols_ignore_in_object_files__Wl___entry_0__fuse_ld_bfd succeeded with the following output:
+Change Dir: C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ncs/toolchains/0b393f9e1b/opt/bin/ninja.exe cmTC_8456b && [1/2] Building C object CMakeFiles/cmTC_8456b.dir/src.c.obj
+[2/2] Linking C executable cmTC_8456b
+arm-zephyr-eabi-gcc.exe: warning: CMakeFiles/cmTC_8456b.dir/src.c.obj: linker input file unused because linking not done
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test check_Wall_C__c__nostartfiles__nostdlib__isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include___isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include_fixed___Wl___unresolved_symbols_ignore_in_object_files__Wl___entry_0__fuse_ld_bfd succeeded with the following output:
+Change Dir: C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ncs/toolchains/0b393f9e1b/opt/bin/ninja.exe cmTC_06511 && [1/2] Building C object CMakeFiles/cmTC_06511.dir/src.c.obj
+[2/2] Linking C executable cmTC_06511
+arm-zephyr-eabi-gcc.exe: warning: CMakeFiles/cmTC_06511.dir/src.c.obj: linker input file unused because linking not done
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test check_Wformat__Wformat_security_C__c__nostartfiles__nostdlib__isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include___isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include_fixed___Wl___unresolved_symbols_ignore_in_object_files__Wl___entry_0__fuse_ld_bfd succeeded with the following output:
+Change Dir: C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ncs/toolchains/0b393f9e1b/opt/bin/ninja.exe cmTC_e5340 && [1/2] Building C object CMakeFiles/cmTC_e5340.dir/src.c.obj
+[2/2] Linking C executable cmTC_e5340
+arm-zephyr-eabi-gcc.exe: warning: CMakeFiles/cmTC_e5340.dir/src.c.obj: linker input file unused because linking not done
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test check_Wformat__Wformat_zero_length_C__c__nostartfiles__nostdlib__isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include___isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include_fixed___Wl___unresolved_symbols_ignore_in_object_files__Wl___entry_0__fuse_ld_bfd succeeded with the following output:
+Change Dir: C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ncs/toolchains/0b393f9e1b/opt/bin/ninja.exe cmTC_eac85 && [1/2] Building C object CMakeFiles/cmTC_eac85.dir/src.c.obj
+[2/2] Linking C executable cmTC_eac85
+arm-zephyr-eabi-gcc.exe: warning: CMakeFiles/cmTC_eac85.dir/src.c.obj: linker input file unused because linking not done
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test check_Wdouble_promotion_C__c__nostartfiles__nostdlib__isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include___isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include_fixed___Wl___unresolved_symbols_ignore_in_object_files__Wl___entry_0__fuse_ld_bfd succeeded with the following output:
+Change Dir: C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ncs/toolchains/0b393f9e1b/opt/bin/ninja.exe cmTC_da8b3 && [1/2] Building C object CMakeFiles/cmTC_da8b3.dir/src.c.obj
+[2/2] Linking C executable cmTC_da8b3
+arm-zephyr-eabi-gcc.exe: warning: CMakeFiles/cmTC_da8b3.dir/src.c.obj: linker input file unused because linking not done
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test check_Wpointer_sign_C__c__nostartfiles__nostdlib__isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include___isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include_fixed___Wl___unresolved_symbols_ignore_in_object_files__Wl___entry_0__fuse_ld_bfd succeeded with the following output:
+Change Dir: C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ncs/toolchains/0b393f9e1b/opt/bin/ninja.exe cmTC_fc986 && [1/2] Building C object CMakeFiles/cmTC_fc986.dir/src.c.obj
+[2/2] Linking C executable cmTC_fc986
+arm-zephyr-eabi-gcc.exe: warning: CMakeFiles/cmTC_fc986.dir/src.c.obj: linker input file unused because linking not done
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test check_Wpointer_arith_C__c__nostartfiles__nostdlib__isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include___isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include_fixed___Wl___unresolved_symbols_ignore_in_object_files__Wl___entry_0__fuse_ld_bfd succeeded with the following output:
+Change Dir: C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ncs/toolchains/0b393f9e1b/opt/bin/ninja.exe cmTC_588ca && [1/2] Building C object CMakeFiles/cmTC_588ca.dir/src.c.obj
+[2/2] Linking C executable cmTC_588ca
+arm-zephyr-eabi-gcc.exe: warning: CMakeFiles/cmTC_588ca.dir/src.c.obj: linker input file unused because linking not done
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test check_Wexpansion_to_defined_C__c__nostartfiles__nostdlib__isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include___isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include_fixed___Wl___unresolved_symbols_ignore_in_object_files__Wl___entry_0__fuse_ld_bfd succeeded with the following output:
+Change Dir: C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ncs/toolchains/0b393f9e1b/opt/bin/ninja.exe cmTC_f52a5 && [1/2] Building C object CMakeFiles/cmTC_f52a5.dir/src.c.obj
+[2/2] Linking C executable cmTC_f52a5
+arm-zephyr-eabi-gcc.exe: warning: CMakeFiles/cmTC_f52a5.dir/src.c.obj: linker input file unused because linking not done
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test check_Wlogical_op_C__c__nostartfiles__nostdlib__isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include___isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include_fixed___Wl___unresolved_symbols_ignore_in_object_files__Wl___entry_0__fuse_ld_bfd succeeded with the following output:
+Change Dir: C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ncs/toolchains/0b393f9e1b/opt/bin/ninja.exe cmTC_c772e && [1/2] Building C object CMakeFiles/cmTC_c772e.dir/src.c.obj
+[2/2] Linking C executable cmTC_c772e
+arm-zephyr-eabi-gcc.exe: warning: CMakeFiles/cmTC_c772e.dir/src.c.obj: linker input file unused because linking not done
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test check_Wmissing_field_initializers_C__c__nostartfiles__nostdlib__isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include___isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include_fixed___Wl___unresolved_symbols_ignore_in_object_files__Wl___entry_0__fuse_ld_bfd succeeded with the following output:
+Change Dir: C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ncs/toolchains/0b393f9e1b/opt/bin/ninja.exe cmTC_33ff8 && [1/2] Building C object CMakeFiles/cmTC_33ff8.dir/src.c.obj
+[2/2] Linking C executable cmTC_33ff8
+arm-zephyr-eabi-gcc.exe: warning: CMakeFiles/cmTC_33ff8.dir/src.c.obj: linker input file unused because linking not done
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test check_Wpacked_bitfield_compat_C__c__nostartfiles__nostdlib__isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include___isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include_fixed___Wl___unresolved_symbols_ignore_in_object_files__Wl___entry_0__fuse_ld_bfd succeeded with the following output:
+Change Dir: C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ncs/toolchains/0b393f9e1b/opt/bin/ninja.exe cmTC_228b5 && [1/2] Building C object CMakeFiles/cmTC_228b5.dir/src.c.obj
+[2/2] Linking C executable cmTC_228b5
+arm-zephyr-eabi-gcc.exe: warning: CMakeFiles/cmTC_228b5.dir/src.c.obj: linker input file unused because linking not done
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test check_Wvla_C__c__nostartfiles__nostdlib__isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include___isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include_fixed___Wl___unresolved_symbols_ignore_in_object_files__Wl___entry_0__fuse_ld_bfd succeeded with the following output:
+Change Dir: C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ncs/toolchains/0b393f9e1b/opt/bin/ninja.exe cmTC_84ea6 && [1/2] Building C object CMakeFiles/cmTC_84ea6.dir/src.c.obj
+[2/2] Linking C executable cmTC_84ea6
+arm-zephyr-eabi-gcc.exe: warning: CMakeFiles/cmTC_84ea6.dir/src.c.obj: linker input file unused because linking not done
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test check_Wunused_but_set_variable_C__c__nostartfiles__nostdlib__isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include___isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include_fixed___Wl___unresolved_symbols_ignore_in_object_files__Wl___entry_0__fuse_ld_bfd succeeded with the following output:
+Change Dir: C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ncs/toolchains/0b393f9e1b/opt/bin/ninja.exe cmTC_3ed15 && [1/2] Building C object CMakeFiles/cmTC_3ed15.dir/src.c.obj
+[2/2] Linking C executable cmTC_3ed15
+arm-zephyr-eabi-gcc.exe: warning: CMakeFiles/cmTC_3ed15.dir/src.c.obj: linker input file unused because linking not done
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test check_Werror_implicit_int_C__c__nostartfiles__nostdlib__isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include___isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include_fixed___Wl___unresolved_symbols_ignore_in_object_files__Wl___entry_0__fuse_ld_bfd succeeded with the following output:
+Change Dir: C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ncs/toolchains/0b393f9e1b/opt/bin/ninja.exe cmTC_582fd && [1/2] Building C object CMakeFiles/cmTC_582fd.dir/src.c.obj
+[2/2] Linking C executable cmTC_582fd
+arm-zephyr-eabi-gcc.exe: warning: CMakeFiles/cmTC_582fd.dir/src.c.obj: linker input file unused because linking not done
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test check_mstack_protector_guard_global_C__c__nostartfiles__nostdlib__isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include___isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include_fixed___Wl___unresolved_symbols_ignore_in_object_files__Wl___entry_0__fuse_ld_bfd succeeded with the following output:
+Change Dir: C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ncs/toolchains/0b393f9e1b/opt/bin/ninja.exe cmTC_3810b && [1/2] Building C object CMakeFiles/cmTC_3810b.dir/src.c.obj
+[2/2] Linking C executable cmTC_3810b
+arm-zephyr-eabi-gcc.exe: warning: CMakeFiles/cmTC_3810b.dir/src.c.obj: linker input file unused because linking not done
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test check_fno_freestanding_C__c__nostartfiles__nostdlib__isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include___isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include_fixed___Wl___unresolved_symbols_ignore_in_object_files__Wl___entry_0__fuse_ld_bfd succeeded with the following output:
+Change Dir: C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ncs/toolchains/0b393f9e1b/opt/bin/ninja.exe cmTC_40903 && [1/2] Building C object CMakeFiles/cmTC_40903.dir/src.c.obj
+[2/2] Linking C executable cmTC_40903
+arm-zephyr-eabi-gcc.exe: warning: CMakeFiles/cmTC_40903.dir/src.c.obj: linker input file unused because linking not done
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test check_ffreestanding_C__c__nostartfiles__nostdlib__isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include___isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include_fixed___Wl___unresolved_symbols_ignore_in_object_files__Wl___entry_0__fuse_ld_bfd succeeded with the following output:
+Change Dir: C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ncs/toolchains/0b393f9e1b/opt/bin/ninja.exe cmTC_d2347 && [1/2] Building C object CMakeFiles/cmTC_d2347.dir/src.c.obj
+[2/2] Linking C executable cmTC_d2347
+arm-zephyr-eabi-gcc.exe: warning: CMakeFiles/cmTC_d2347.dir/src.c.obj: linker input file unused because linking not done
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test check_gdwarf_4_C__c__nostartfiles__nostdlib__isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include___isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include_fixed___Wl___unresolved_symbols_ignore_in_object_files__Wl___entry_0__fuse_ld_bfd succeeded with the following output:
+Change Dir: C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ncs/toolchains/0b393f9e1b/opt/bin/ninja.exe cmTC_e0a4c && [1/2] Building C object CMakeFiles/cmTC_e0a4c.dir/src.c.obj
+[2/2] Linking C executable cmTC_e0a4c
+arm-zephyr-eabi-gcc.exe: warning: CMakeFiles/cmTC_e0a4c.dir/src.c.obj: linker input file unused because linking not done
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test check_C__c__nostartfiles__nostdlib__isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include___isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include_fixed___Wl___unresolved_symbols_ignore_in_object_files__Wl___entry_0__fuse_ld_bfd__Wl___gc_sections succeeded with the following output:
+Change Dir: C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ncs/toolchains/0b393f9e1b/opt/bin/ninja.exe cmTC_a4bc0 && [1/2] Building C object CMakeFiles/cmTC_a4bc0.dir/src.c.obj
+[2/2] Linking C executable cmTC_a4bc0
+arm-zephyr-eabi-gcc.exe: warning: CMakeFiles/cmTC_a4bc0.dir/src.c.obj: linker input file unused because linking not done
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test check_C__c__nostartfiles__nostdlib__isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include___isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include_fixed___Wl___unresolved_symbols_ignore_in_object_files__Wl___entry_0__fuse_ld_bfd__Wl___build_id_none succeeded with the following output:
+Change Dir: C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ncs/toolchains/0b393f9e1b/opt/bin/ninja.exe cmTC_c495e && [1/2] Building C object CMakeFiles/cmTC_c495e.dir/src.c.obj
+[2/2] Linking C executable cmTC_c495e
+arm-zephyr-eabi-gcc.exe: warning: CMakeFiles/cmTC_c495e.dir/src.c.obj: linker input file unused because linking not done
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test check_C__c__nostartfiles__nostdlib__isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include___isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include_fixed___Wl___unresolved_symbols_ignore_in_object_files__Wl___entry_0__fuse_ld_bfd__nostdlib succeeded with the following output:
+Change Dir: C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ncs/toolchains/0b393f9e1b/opt/bin/ninja.exe cmTC_ef059 && [1/2] Building C object CMakeFiles/cmTC_ef059.dir/src.c.obj
+[2/2] Linking C executable cmTC_ef059
+arm-zephyr-eabi-gcc.exe: warning: CMakeFiles/cmTC_ef059.dir/src.c.obj: linker input file unused because linking not done
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test check_C__c__nostartfiles__nostdlib__isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include___isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include_fixed___Wl___unresolved_symbols_ignore_in_object_files__Wl___entry_0__fuse_ld_bfd__static succeeded with the following output:
+Change Dir: C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ncs/toolchains/0b393f9e1b/opt/bin/ninja.exe cmTC_0eeca && [1/2] Building C object CMakeFiles/cmTC_0eeca.dir/src.c.obj
+[2/2] Linking C executable cmTC_0eeca
+arm-zephyr-eabi-gcc.exe: warning: CMakeFiles/cmTC_0eeca.dir/src.c.obj: linker input file unused because linking not done
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test check_C__c__nostartfiles__nostdlib__isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include___isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include_fixed___Wl___unresolved_symbols_ignore_in_object_files__Wl___entry_0__fuse_ld_bfd__Wl__X succeeded with the following output:
+Change Dir: C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ncs/toolchains/0b393f9e1b/opt/bin/ninja.exe cmTC_98138 && [1/2] Building C object CMakeFiles/cmTC_98138.dir/src.c.obj
+[2/2] Linking C executable cmTC_98138
+arm-zephyr-eabi-gcc.exe: warning: CMakeFiles/cmTC_98138.dir/src.c.obj: linker input file unused because linking not done
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test check_C__c__nostartfiles__nostdlib__isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include___isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include_fixed___Wl___unresolved_symbols_ignore_in_object_files__Wl___entry_0__fuse_ld_bfd__Wl__N succeeded with the following output:
+Change Dir: C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ncs/toolchains/0b393f9e1b/opt/bin/ninja.exe cmTC_13959 && [1/2] Building C object CMakeFiles/cmTC_13959.dir/src.c.obj
+[2/2] Linking C executable cmTC_13959
+arm-zephyr-eabi-gcc.exe: warning: CMakeFiles/cmTC_13959.dir/src.c.obj: linker input file unused because linking not done
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test check_C__c__nostartfiles__nostdlib__isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include___isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include_fixed___Wl___unresolved_symbols_ignore_in_object_files__Wl___entry_0__fuse_ld_bfd__Wl___orphan_handling_warn succeeded with the following output:
+Change Dir: C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ncs/toolchains/0b393f9e1b/opt/bin/ninja.exe cmTC_dab2e && [1/2] Building C object CMakeFiles/cmTC_dab2e.dir/src.c.obj
+[2/2] Linking C executable cmTC_dab2e
+arm-zephyr-eabi-gcc.exe: warning: CMakeFiles/cmTC_dab2e.dir/src.c.obj: linker input file unused because linking not done
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test check_C__c__nostartfiles__nostdlib__isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include___isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include_fixed___Wl___unresolved_symbols_ignore_in_object_files__Wl___entry_0__fuse_ld_bfd__Wl___orphan_handling_error succeeded with the following output:
+Change Dir: C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ncs/toolchains/0b393f9e1b/opt/bin/ninja.exe cmTC_15f90 && [1/2] Building C object CMakeFiles/cmTC_15f90.dir/src.c.obj
+[2/2] Linking C executable cmTC_15f90
+arm-zephyr-eabi-gcc.exe: warning: CMakeFiles/cmTC_15f90.dir/src.c.obj: linker input file unused because linking not done
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test check_C__c__nostartfiles__nostdlib__isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include___isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include_fixed___Wl___unresolved_symbols_ignore_in_object_files__Wl___entry_0__fuse_ld_bfd__Wl___print_memory_usage succeeded with the following output:
+Change Dir: C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ncs/toolchains/0b393f9e1b/opt/bin/ninja.exe cmTC_c5c87 && [1/2] Building C object CMakeFiles/cmTC_c5c87.dir/src.c.obj
+[2/2] Linking C executable cmTC_c5c87
+arm-zephyr-eabi-gcc.exe: warning: CMakeFiles/cmTC_c5c87.dir/src.c.obj: linker input file unused because linking not done
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test check_C__c__nostartfiles__nostdlib__isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include___isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include_fixed___Wl___unresolved_symbols_ignore_in_object_files__Wl___entry_0__fuse_ld_bfd__Wl___no_relax succeeded with the following output:
+Change Dir: C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ncs/toolchains/0b393f9e1b/opt/bin/ninja.exe cmTC_05b6a && [1/2] Building C object CMakeFiles/cmTC_05b6a.dir/src.c.obj
+[2/2] Linking C executable cmTC_05b6a
+arm-zephyr-eabi-gcc.exe: warning: CMakeFiles/cmTC_05b6a.dir/src.c.obj: linker input file unused because linking not done
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test check_C__c__nostartfiles__nostdlib__isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include___isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include_fixed___Wl___unresolved_symbols_ignore_in_object_files__Wl___entry_0__fuse_ld_bfd__Wl___sort_common_descending succeeded with the following output:
+Change Dir: C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ncs/toolchains/0b393f9e1b/opt/bin/ninja.exe cmTC_1865e && [1/2] Building C object CMakeFiles/cmTC_1865e.dir/src.c.obj
+[2/2] Linking C executable cmTC_1865e
+arm-zephyr-eabi-gcc.exe: warning: CMakeFiles/cmTC_1865e.dir/src.c.obj: linker input file unused because linking not done
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test check_C__c__nostartfiles__nostdlib__isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include___isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include_fixed___Wl___unresolved_symbols_ignore_in_object_files__Wl___entry_0__fuse_ld_bfd__Wl___sort_section_alignment succeeded with the following output:
+Change Dir: C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ncs/toolchains/0b393f9e1b/opt/bin/ninja.exe cmTC_dd538 && [1/2] Building C object CMakeFiles/cmTC_dd538.dir/src.c.obj
+[2/2] Linking C executable cmTC_dd538
+arm-zephyr-eabi-gcc.exe: warning: CMakeFiles/cmTC_dd538.dir/src.c.obj: linker input file unused because linking not done
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test check_C__c__nostartfiles__nostdlib__isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include___isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include_fixed___Wl___unresolved_symbols_ignore_in_object_files__Wl___entry_0__fuse_ld_bfd__pg succeeded with the following output:
+Change Dir: C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ncs/toolchains/0b393f9e1b/opt/bin/ninja.exe cmTC_f2f47 && [1/2] Building C object CMakeFiles/cmTC_f2f47.dir/src.c.obj
+[2/2] Linking C executable cmTC_f2f47
+arm-zephyr-eabi-gcc.exe: warning: CMakeFiles/cmTC_f2f47.dir/src.c.obj: linker input file unused because linking not done
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test check_C__c__nostartfiles__nostdlib__isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include___isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include_fixed___Wl___unresolved_symbols_ignore_in_object_files__Wl___entry_0__fuse_ld_bfd__mcpu_cortex_m33__mthumb__mabi_aapcs__mfp16_format_ieee__mtp_soft__fuse_ld_bfd succeeded with the following output:
+Change Dir: C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ncs/toolchains/0b393f9e1b/opt/bin/ninja.exe cmTC_6267c && [1/2] Building C object CMakeFiles/cmTC_6267c.dir/src.c.obj
+[2/2] Linking C executable cmTC_6267c
+arm-zephyr-eabi-gcc.exe: warning: CMakeFiles/cmTC_6267c.dir/src.c.obj: linker input file unused because linking not done
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test check_fno_asynchronous_unwind_tables_C__c__nostartfiles__nostdlib__isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include___isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include_fixed___Wl___unresolved_symbols_ignore_in_object_files__Wl___entry_0__fuse_ld_bfd succeeded with the following output:
+Change Dir: C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ncs/toolchains/0b393f9e1b/opt/bin/ninja.exe cmTC_d668e && [1/2] Building C object CMakeFiles/cmTC_d668e.dir/src.c.obj
+[2/2] Linking C executable cmTC_d668e
+arm-zephyr-eabi-gcc.exe: warning: CMakeFiles/cmTC_d668e.dir/src.c.obj: linker input file unused because linking not done
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test check_ftls_model_local_exec_C__c__nostartfiles__nostdlib__isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include___isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include_fixed___Wl___unresolved_symbols_ignore_in_object_files__Wl___entry_0__fuse_ld_bfd succeeded with the following output:
+Change Dir: C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ncs/toolchains/0b393f9e1b/opt/bin/ninja.exe cmTC_50043 && [1/2] Building C object CMakeFiles/cmTC_50043.dir/src.c.obj
+[2/2] Linking C executable cmTC_50043
+arm-zephyr-eabi-gcc.exe: warning: CMakeFiles/cmTC_50043.dir/src.c.obj: linker input file unused because linking not done
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test check_fno_reorder_functions_C__c__nostartfiles__nostdlib__isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include___isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include_fixed___Wl___unresolved_symbols_ignore_in_object_files__Wl___entry_0__fuse_ld_bfd succeeded with the following output:
+Change Dir: C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ncs/toolchains/0b393f9e1b/opt/bin/ninja.exe cmTC_2a4c2 && [1/2] Building C object CMakeFiles/cmTC_2a4c2.dir/src.c.obj
+[2/2] Linking C executable cmTC_2a4c2
+arm-zephyr-eabi-gcc.exe: warning: CMakeFiles/cmTC_2a4c2.dir/src.c.obj: linker input file unused because linking not done
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test check__param_min_pagesize_0_C__c__nostartfiles__nostdlib__isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include___isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include_fixed___Wl___unresolved_symbols_ignore_in_object_files__Wl___entry_0__fuse_ld_bfd succeeded with the following output:
+Change Dir: C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ncs/toolchains/0b393f9e1b/opt/bin/ninja.exe cmTC_a49c6 && [1/2] Building C object CMakeFiles/cmTC_a49c6.dir/src.c.obj
+[2/2] Linking C executable cmTC_a49c6
+arm-zephyr-eabi-gcc.exe: warning: CMakeFiles/cmTC_a49c6.dir/src.c.obj: linker input file unused because linking not done
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test check_fno_defer_pop_C__c__nostartfiles__nostdlib__isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include___isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include_fixed___Wl___unresolved_symbols_ignore_in_object_files__Wl___entry_0__fuse_ld_bfd succeeded with the following output:
+Change Dir: C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ncs/toolchains/0b393f9e1b/opt/bin/ninja.exe cmTC_f9dc0 && [1/2] Building C object CMakeFiles/cmTC_f9dc0.dir/src.c.obj
+[2/2] Linking C executable cmTC_f9dc0
+arm-zephyr-eabi-gcc.exe: warning: CMakeFiles/cmTC_f9dc0.dir/src.c.obj: linker input file unused because linking not done
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test check_fmacro_prefix_map_C__ncs_v3_0_0_nrf_samples_bluetooth_peripheral_uart_CMAKE_SOURCE_DIR_C__c__nostartfiles__nostdlib__isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include___isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include_fixed___Wl___unresolved_symbols_ignore_in_object_files__Wl___entry_0__fuse_ld_bfd succeeded with the following output:
+Change Dir: C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ncs/toolchains/0b393f9e1b/opt/bin/ninja.exe cmTC_04fd6 && [1/2] Building C object CMakeFiles/cmTC_04fd6.dir/src.c.obj
+[2/2] Linking C executable cmTC_04fd6
+arm-zephyr-eabi-gcc.exe: warning: CMakeFiles/cmTC_04fd6.dir/src.c.obj: linker input file unused because linking not done
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test check_fmacro_prefix_map_C__ncs_v3_0_0_zephyr_ZEPHYR_BASE_C__c__nostartfiles__nostdlib__isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include___isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include_fixed___Wl___unresolved_symbols_ignore_in_object_files__Wl___entry_0__fuse_ld_bfd succeeded with the following output:
+Change Dir: C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ncs/toolchains/0b393f9e1b/opt/bin/ninja.exe cmTC_05118 && [1/2] Building C object CMakeFiles/cmTC_05118.dir/src.c.obj
+[2/2] Linking C executable cmTC_05118
+arm-zephyr-eabi-gcc.exe: warning: CMakeFiles/cmTC_05118.dir/src.c.obj: linker input file unused because linking not done
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test check_fmacro_prefix_map_C__ncs_v3_0_0_WEST_TOPDIR_C__c__nostartfiles__nostdlib__isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include___isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include_fixed___Wl___unresolved_symbols_ignore_in_object_files__Wl___entry_0__fuse_ld_bfd succeeded with the following output:
+Change Dir: C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ncs/toolchains/0b393f9e1b/opt/bin/ninja.exe cmTC_daa93 && [1/2] Building C object CMakeFiles/cmTC_daa93.dir/src.c.obj
+[2/2] Linking C executable cmTC_daa93
+arm-zephyr-eabi-gcc.exe: warning: CMakeFiles/cmTC_daa93.dir/src.c.obj: linker input file unused because linking not done
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test check_ffunction_sections_C__c__nostartfiles__nostdlib__isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include___isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include_fixed___Wl___unresolved_symbols_ignore_in_object_files__Wl___entry_0__fuse_ld_bfd succeeded with the following output:
+Change Dir: C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ncs/toolchains/0b393f9e1b/opt/bin/ninja.exe cmTC_b7b66 && [1/2] Building C object CMakeFiles/cmTC_b7b66.dir/src.c.obj
+[2/2] Linking C executable cmTC_b7b66
+arm-zephyr-eabi-gcc.exe: warning: CMakeFiles/cmTC_b7b66.dir/src.c.obj: linker input file unused because linking not done
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test check_fdata_sections_C__c__nostartfiles__nostdlib__isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include___isystem__c__ncs_toolchains_0b393f9e1b_opt_zephyr_sdk_arm_zephyr_eabi_bin____lib_gcc_arm_zephyr_eabi_12_2_0_include_fixed___Wl___unresolved_symbols_ignore_in_object_files__Wl___entry_0__fuse_ld_bfd succeeded with the following output:
+Change Dir: C:/ncs/v3.0.0/nrf/samples/bluetooth/peripheral_uart/build/peripheral_uart/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ncs/toolchains/0b393f9e1b/opt/bin/ninja.exe cmTC_aa004 && [1/2] Building C object CMakeFiles/cmTC_aa004.dir/src.c.obj
+[2/2] Linking C executable cmTC_aa004
+arm-zephyr-eabi-gcc.exe: warning: CMakeFiles/cmTC_aa004.dir/src.c.obj: linker input file unused because linking not done
+
+
+Source file was:
+int main(void) { return 0; }
