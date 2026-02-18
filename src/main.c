@@ -5,8 +5,14 @@
  */
 
 /** @file
- *  @brief Nordic UART Bridge Service (NUS) sample
+ *  @brief Nordic UART Bridge Service (NUS) sample with BME280 sensor
+ *
+ *  Behavior:
+ *  - BME280 readings are ALWAYS printed to the serial terminal (printk)
+ *  - When a BLE central (phone) is connected, readings are also sent over NUS
+ *  - UART bridge: anything typed in serial → BLE, anything received from BLE → serial
  */
+
 #include <uart_async_adapter.h>
 
 #include <zephyr/types.h>
@@ -45,7 +51,7 @@ LOG_MODULE_REGISTER(LOG_MODULE_NAME);
 #define PRIORITY 7
 
 #define DEVICE_NAME CONFIG_BT_DEVICE_NAME
-#define DEVICE_NAME_LEN	(sizeof(DEVICE_NAME) - 1)
+#define DEVICE_NAME_LEN (sizeof(DEVICE_NAME) - 1)
 
 #define RUN_STATUS_LED DK_LED1
 #define RUN_LED_BLINK_INTERVAL 1000
@@ -59,11 +65,7 @@ LOG_MODULE_REGISTER(LOG_MODULE_NAME);
 #define UART_WAIT_FOR_BUF_DELAY K_MSEC(50)
 #define UART_WAIT_FOR_RX CONFIG_BT_NUS_UART_RX_WAIT_TIME
 
-//I2C Multiplexer TCA9548A
-// #define TCA9548A_ADDR 0x70
-// #define number_of_channels 8
-#define BME280_I2C_ADDR 0x76
-
+/* BME280 sensor device tree node */
 #define BME280_SENSOR DT_INST(0, bosch_bme280)
 #if DT_NODE_EXISTS(BME280_SENSOR)
 #define I2C_DEV DT_BUS(BME280_SENSOR)
@@ -71,25 +73,24 @@ LOG_MODULE_REGISTER(LOG_MODULE_NAME);
 #define I2C_DEV DT_NODELABEL(i2c1)
 #endif
 
+/* BME280 reading interval in milliseconds */
+#define BME280_INTERVAL_MS 500
 
 static K_SEM_DEFINE(ble_init_ok, 0, 1);
 
-//I to C multiplixer 
-
 static struct bt_conn *current_conn;
-//a pointer to Device structure for BME280 sensor
-static const struct device *bme280_dev;
-static const struct device *i2c_dev;
 static struct bt_conn *auth_conn;
 
+static const struct device *bme280_dev;
+static const struct device *i2c_dev;
+
 static struct k_work adv_work;
-//work item for BME280 sensor reading
 static struct k_work_delayable bme280_work;
 static const struct device *uart = DEVICE_DT_GET(DT_CHOSEN(nordic_nus_uart));
 static struct k_work_delayable uart_work;
 
+/* Forward declarations */
 static void bme280_work_handler(struct k_work *work);
-
 
 struct uart_data_t {
 	void *fifo_reserved;
@@ -115,82 +116,9 @@ UART_ASYNC_ADAPTER_INST_DEFINE(async_adapter);
 #define async_adapter NULL
 #endif
 
-// static int tcca_select_channel(uint8_t channel)
-// {
-// 	uint8_t config;
-// 	int err;
-
-// 	// if(!I2C_DEV) {
-// 	// 	LOG_ERR("I2C device not ready");
-// 	// 	return -ENODEV;
-// 	// }
-
-// 	if (channel >= number_of_channels) {
-// 		return -EINVAL;
-// 	}
-// 	config = 1 << channel;
-// 	err = i2c_write(i2c_dev, &config, 1, TCA9548A_ADDR);
-// 	if (err) {
-// 		LOG_ERR("Failed to select TCA9548A channel %d (err %d)", channel, err);
-// 		return err;
-// 	}
-// 	k_sleep(K_MSEC(10)); //wait for the channel to switch
-// 	return 0;
-// }
-// static int disable_tcca_channels(void)
-// {
-// 	uint8_t config = 0x00;
-// 	int err;
-
-// 	// if(!I2C_DEV) {
-// 	// 	LOG_ERR("I2C device not ready");
-// 	// 	return -ENODEV;
-// 	// }
-
-// 	err = i2c_write(i2c_dev, &config, 1, TCA9548A_ADDR);
-// 	if (err) {
-// 		LOG_ERR("Failed to disable TCA9548A channels (err %d)", err);
-// 		return err;
-// 	}
-// 	k_sleep(K_MSEC(10)); //wait for the channel to switch
-// 	return 0;
-// }
-
-// static int tca_init(void)
-// {
-// 	int err;
-// 	uint8_t chip_id;
-// 	uint8_t reg_addr = 0xD0;
-
-// 	err = disable_tcca_channels();
-// 	if (err) {
-// 		LOG_ERR("Failed to initialize TCA9548A");
-// 		return err;
-// 	}
-
-// 	for(int ch = 0; ch < number_of_channels; ch++) {
-// 		err = tcca_select_channel(ch);
-// 		if (err) {
-// 			return err;
-// 		}
-
-// 		//read BME280 chip ID
-// 		err = i2c_write_read(i2c_dev, BME280_I2C_ADDR, &reg_addr, 1, &chip_id, 1);
-// 		if (err) {
-// 			LOG_ERR("Failed to read BME280 chip ID on channel %d (err %d)", ch, err);
-// 			continue;
-// 		}
-
-// 		if (chip_id == 0x60) {
-// 			LOG_INF("BME280 found on channel %d", ch);f
-// 		} else {
-// 			LOG_WRN("Unexpected chip ID 0x%02X on channel %d", chip_id, ch);
-// 		}
-// 	}
-
-// 	disable_tcca_channels();
-// 	return 0;
-// }
+/* ========================================================================== */
+/*  UART callbacks & init                                                     */
+/* ========================================================================== */
 
 static void uart_cb(const struct device *dev, struct uart_event *evt, void *user_data)
 {
@@ -204,19 +132,16 @@ static void uart_cb(const struct device *dev, struct uart_event *evt, void *user
 	switch (evt->type) {
 	case UART_TX_DONE:
 		LOG_DBG("UART_TX_DONE");
-		if ((evt->data.tx.len == 0) ||
-		    (!evt->data.tx.buf)) {
+		if ((evt->data.tx.len == 0) || (!evt->data.tx.buf)) {
 			return;
 		}
 
 		if (aborted_buf) {
-			buf = CONTAINER_OF(aborted_buf, struct uart_data_t,
-					   data[0]);
+			buf = CONTAINER_OF(aborted_buf, struct uart_data_t, data[0]);
 			aborted_buf = NULL;
 			aborted_len = 0;
 		} else {
-			buf = CONTAINER_OF(evt->data.tx.buf, struct uart_data_t,
-					   data[0]);
+			buf = CONTAINER_OF(evt->data.tx.buf, struct uart_data_t, data[0]);
 		}
 
 		k_free(buf);
@@ -229,7 +154,6 @@ static void uart_cb(const struct device *dev, struct uart_event *evt, void *user
 		if (uart_tx(uart, buf->data, buf->len, SYS_FOREVER_MS)) {
 			LOG_WRN("Failed to send data over UART");
 		}
-
 		break;
 
 	case UART_RX_RDY:
@@ -246,7 +170,6 @@ static void uart_cb(const struct device *dev, struct uart_event *evt, void *user
 			disable_req = true;
 			uart_rx_disable(uart);
 		}
-
 		break;
 
 	case UART_RX_DISABLED:
@@ -262,9 +185,7 @@ static void uart_cb(const struct device *dev, struct uart_event *evt, void *user
 			return;
 		}
 
-		uart_rx_enable(uart, buf->data, sizeof(buf->data),
-			       UART_WAIT_FOR_RX);
-
+		uart_rx_enable(uart, buf->data, sizeof(buf->data), UART_WAIT_FOR_RX);
 		break;
 
 	case UART_RX_BUF_REQUEST:
@@ -276,20 +197,17 @@ static void uart_cb(const struct device *dev, struct uart_event *evt, void *user
 		} else {
 			LOG_WRN("Not able to allocate UART receive buffer");
 		}
-
 		break;
 
 	case UART_RX_BUF_RELEASED:
 		LOG_DBG("UART_RX_BUF_RELEASED");
-		buf = CONTAINER_OF(evt->data.rx_buf.buf, struct uart_data_t,
-				   data[0]);
+		buf = CONTAINER_OF(evt->data.rx_buf.buf, struct uart_data_t, data[0]);
 
 		if (buf->len > 0) {
 			k_fifo_put(&fifo_uart_rx_data, buf);
 		} else {
 			k_free(buf);
 		}
-
 		break;
 
 	case UART_TX_ABORTED:
@@ -299,12 +217,10 @@ static void uart_cb(const struct device *dev, struct uart_event *evt, void *user
 		}
 
 		aborted_len += evt->data.tx.len;
-		buf = CONTAINER_OF((void *)aborted_buf, struct uart_data_t,
-				   data);
+		buf = CONTAINER_OF((void *)aborted_buf, struct uart_data_t, data);
 
 		uart_tx(uart, &buf->data[aborted_len],
 			buf->len - aborted_len, SYS_FOREVER_MS);
-
 		break;
 
 	default:
@@ -331,7 +247,7 @@ static void uart_work_handler(struct k_work *item)
 static bool uart_test_async_api(const struct device *dev)
 {
 	const struct uart_driver_api *api =
-			(const struct uart_driver_api *)dev->api;
+		(const struct uart_driver_api *)dev->api;
 
 	return (api->callback_set != NULL);
 }
@@ -364,9 +280,7 @@ static int uart_init(void)
 
 	k_work_init_delayable(&uart_work, uart_work_handler);
 
-
 	if (IS_ENABLED(CONFIG_UART_ASYNC_ADAPTER) && !uart_test_async_api(uart)) {
-		/* Implement API adapter */
 		uart_async_adapter_init(async_adapter, uart);
 		uart = async_adapter;
 	}
@@ -387,7 +301,6 @@ static int uart_init(void)
 			if (dtr) {
 				break;
 			}
-			/* Give CPU resources to low priority threads. */
 			k_sleep(K_MSEC(100));
 		}
 		LOG_INF("DTR set");
@@ -402,7 +315,6 @@ static int uart_init(void)
 	}
 
 	tx = k_malloc(sizeof(*tx));
-
 	if (tx) {
 		pos = snprintf(tx->data, sizeof(tx->data),
 			       "Starting Nordic UART service sample\r\n");
@@ -431,17 +343,20 @@ static int uart_init(void)
 	err = uart_rx_enable(uart, rx->data, sizeof(rx->data), UART_WAIT_FOR_RX);
 	if (err) {
 		LOG_ERR("Cannot enable uart reception (err: %d)", err);
-		/* Free the rx buffer only because the tx buffer will be handled in the callback */
 		k_free(rx);
 	}
 
 	return err;
 }
 
+/* ========================================================================== */
+/*  BLE advertising                                                           */
+/* ========================================================================== */
+
 static void adv_work_handler(struct k_work *work)
 {
-	int err = bt_le_adv_start(BT_LE_ADV_CONN_FAST_2, ad, ARRAY_SIZE(ad), sd, ARRAY_SIZE(sd));
-
+	int err = bt_le_adv_start(BT_LE_ADV_CONN_FAST_2, ad, ARRAY_SIZE(ad),
+				  sd, ARRAY_SIZE(sd));
 	if (err) {
 		LOG_ERR("Advertising failed to start (err %d)", err);
 		return;
@@ -449,51 +364,66 @@ static void adv_work_handler(struct k_work *work)
 
 	LOG_INF("Advertising successfully started");
 }
-//work handler for BME280 sensor reading
-static void bme280_work_handler(struct k_work *work)
-{
-    int err;
-    struct sensor_value temp, hum, press;
-    char nus_msg[96];
-    int len;
-
-    err = sensor_sample_fetch(bme280_dev);
-    if (err) {
-        LOG_ERR("sensor_sample_fetch failed (err %d)", err);
-        k_work_reschedule(&bme280_work, K_MSEC(500));
-        return;
-    }
-
-    sensor_channel_get(bme280_dev, SENSOR_CHAN_AMBIENT_TEMP, &temp);
-    sensor_channel_get(bme280_dev, SENSOR_CHAN_HUMIDITY, &hum);
-    sensor_channel_get(bme280_dev, SENSOR_CHAN_PRESS, &press);
-
-    printk("Temp: %.2f C, Hum: %.2f %%, Press: %.6f hPa\n",
-           sensor_value_to_double(&temp),
-           sensor_value_to_double(&hum),
-           sensor_value_to_double(&press) / 100.0);
-
-    len = snprintk(nus_msg, sizeof(nus_msg),
-                   "T=%.2fC H=%.2f%% P=%.6fhPa\r\n",
-                   sensor_value_to_double(&temp),
-                   sensor_value_to_double(&hum),
-                   sensor_value_to_double(&press) / 100.0);
-
-    if (current_conn && len > 0) {
-        err = bt_nus_send(NULL, (uint8_t *)nus_msg, len);
-        if (err) {
-            LOG_WRN("bt_nus_send failed (err %d)", err);
-        }
-    }
-
-    k_work_reschedule(&bme280_work, K_MSEC(500));
-}
-
 
 static void advertising_start(void)
 {
 	k_work_submit(&adv_work);
 }
+
+/* ========================================================================== */
+/*  BME280 sensor work handler                                                */
+/* ========================================================================== */
+
+static void bme280_work_handler(struct k_work *work)
+{
+	int err;
+	struct sensor_value temp, hum, press;
+	char msg[128];
+	int len;
+
+	err = sensor_sample_fetch(bme280_dev);
+	if (err) {
+		LOG_ERR("sensor_sample_fetch failed (err %d)", err);
+		k_work_reschedule(&bme280_work, K_MSEC(BME280_INTERVAL_MS));
+		return;
+	}
+
+	sensor_channel_get(bme280_dev, SENSOR_CHAN_AMBIENT_TEMP, &temp);
+	sensor_channel_get(bme280_dev, SENSOR_CHAN_HUMIDITY, &hum);
+	sensor_channel_get(bme280_dev, SENSOR_CHAN_PRESS, &press);
+
+	double temp_c  = sensor_value_to_double(&temp);
+	double hum_pct = sensor_value_to_double(&hum);
+	double pres_hpa = sensor_value_to_double(&press) /100.0;
+
+	/*
+	 * Format string that matches the iOS app regex in handleIncoming():
+	 *   pattern = "Temp:\\s*(...).*?Hum:\\s*(...).*?Pres:\\s*(...)"
+	 *
+	 * This format works for BOTH serial terminal reading AND BLE→iOS parsing.
+	 */
+	len = snprintk(msg, sizeof(msg),
+		       "Temp: %.2f C, Hum: %.2f %%, Pres: %.2f hPa\r\n",
+		       temp_c, hum_pct, pres_hpa);
+
+	/* ---- Always print to serial terminal (works without BLE) ---- */
+	printk("%s", msg);
+
+	/* ---- Send over BLE NUS only if a central is connected ---- */
+	if (current_conn && len > 0) {
+		err = bt_nus_send(NULL, (uint8_t *)msg, len);
+		if (err) {
+			LOG_WRN("bt_nus_send failed (err %d)", err);
+		}
+	}
+
+	/* Reschedule next reading */
+	k_work_reschedule(&bme280_work, K_MSEC(BME280_INTERVAL_MS));
+}
+
+/* ========================================================================== */
+/*  BLE connection callbacks                                                  */
+/* ========================================================================== */
 
 static void connected(struct bt_conn *conn, uint8_t err)
 {
@@ -508,7 +438,6 @@ static void connected(struct bt_conn *conn, uint8_t err)
 	LOG_INF("Connected %s", addr);
 
 	current_conn = bt_conn_ref(conn);
-
 	dk_set_led_on(CON_STATUS_LED);
 }
 
@@ -517,8 +446,8 @@ static void disconnected(struct bt_conn *conn, uint8_t reason)
 	char addr[BT_ADDR_LE_STR_LEN];
 
 	bt_addr_le_to_str(bt_conn_get_dst(conn), addr, sizeof(addr));
-
-	LOG_INF("Disconnected: %s, reason 0x%02x %s", addr, reason, bt_hci_err_to_str(reason));
+	LOG_INF("Disconnected: %s, reason 0x%02x %s", addr, reason,
+		bt_hci_err_to_str(reason));
 
 	if (auth_conn) {
 		bt_conn_unref(auth_conn);
@@ -564,13 +493,16 @@ BT_CONN_CB_DEFINE(conn_callbacks) = {
 #endif
 };
 
+/* ========================================================================== */
+/*  BLE security / pairing (optional, enabled via Kconfig)                    */
+/* ========================================================================== */
+
 #if defined(CONFIG_BT_NUS_SECURITY_ENABLED)
 static void auth_passkey_display(struct bt_conn *conn, unsigned int passkey)
 {
 	char addr[BT_ADDR_LE_STR_LEN];
 
 	bt_addr_le_to_str(bt_conn_get_dst(conn), addr, sizeof(addr));
-
 	LOG_INF("Passkey for %s: %06u", addr, passkey);
 }
 
@@ -579,9 +511,7 @@ static void auth_passkey_confirm(struct bt_conn *conn, unsigned int passkey)
 	char addr[BT_ADDR_LE_STR_LEN];
 
 	auth_conn = bt_conn_ref(conn);
-
 	bt_addr_le_to_str(bt_conn_get_dst(conn), addr, sizeof(addr));
-
 	LOG_INF("Passkey for %s: %06u", addr, passkey);
 
 	if (IS_ENABLED(CONFIG_SOC_SERIES_NRF54HX) || IS_ENABLED(CONFIG_SOC_SERIES_NRF54LX)) {
@@ -591,33 +521,27 @@ static void auth_passkey_confirm(struct bt_conn *conn, unsigned int passkey)
 	}
 }
 
-
 static void auth_cancel(struct bt_conn *conn)
 {
 	char addr[BT_ADDR_LE_STR_LEN];
 
 	bt_addr_le_to_str(bt_conn_get_dst(conn), addr, sizeof(addr));
-
 	LOG_INF("Pairing cancelled: %s", addr);
 }
-
 
 static void pairing_complete(struct bt_conn *conn, bool bonded)
 {
 	char addr[BT_ADDR_LE_STR_LEN];
 
 	bt_addr_le_to_str(bt_conn_get_dst(conn), addr, sizeof(addr));
-
 	LOG_INF("Pairing completed: %s, bonded: %d", addr, bonded);
 }
-
 
 static void pairing_failed(struct bt_conn *conn, enum bt_security_err reason)
 {
 	char addr[BT_ADDR_LE_STR_LEN];
 
 	bt_addr_le_to_str(bt_conn_get_dst(conn), addr, sizeof(addr));
-
 	LOG_INF("Pairing failed conn: %s, reason %d %s", addr, reason,
 		bt_security_err_to_str(reason));
 }
@@ -630,21 +554,24 @@ static struct bt_conn_auth_cb conn_auth_callbacks = {
 
 static struct bt_conn_auth_info_cb conn_auth_info_callbacks = {
 	.pairing_complete = pairing_complete,
-	.pairing_failed = pairing_failed
+	.pairing_failed = pairing_failed,
 };
 #else
 static struct bt_conn_auth_cb conn_auth_callbacks;
 static struct bt_conn_auth_info_cb conn_auth_info_callbacks;
 #endif
 
+/* ========================================================================== */
+/*  NUS receive callback (phone → nRF → UART serial)                         */
+/* ========================================================================== */
+
 static void bt_receive_cb(struct bt_conn *conn, const uint8_t *const data,
-			  uint16_t len)
+			   uint16_t len)
 {
 	int err;
 	char addr[BT_ADDR_LE_STR_LEN] = {0};
 
 	bt_addr_le_to_str(bt_conn_get_dst(conn), addr, ARRAY_SIZE(addr));
-
 	LOG_INF("Received data from: %s", addr);
 
 	for (uint16_t pos = 0; pos != len;) {
@@ -665,12 +592,9 @@ static void bt_receive_cb(struct bt_conn *conn, const uint8_t *const data,
 		}
 
 		memcpy(tx->data, &data[pos], tx->len);
-
 		pos += tx->len;
 
-		/* Append the LF character when the CR character triggered
-		 * transmission from the peer.
-		 */
+		/* Append LF when CR triggered transmission from the peer. */
 		if ((pos == len) && (data[len - 1] == '\r')) {
 			tx->data[tx->len] = '\n';
 			tx->len++;
@@ -687,15 +611,22 @@ static struct bt_nus_cb nus_cb = {
 	.received = bt_receive_cb,
 };
 
+/* ========================================================================== */
+/*  Error handler                                                             */
+/* ========================================================================== */
+
 void error(void)
 {
 	dk_set_leds_state(DK_ALL_LEDS_MSK, DK_NO_LEDS_MSK);
 
 	while (true) {
-		/* Spin for ever */
 		k_sleep(K_MSEC(1000));
 	}
 }
+
+/* ========================================================================== */
+/*  Button handling (only for security passkey confirm/reject)                 */
+/* ========================================================================== */
 
 #ifdef CONFIG_BT_NUS_SECURITY_ENABLED
 static void num_comp_reply(bool accept)
@@ -745,6 +676,10 @@ static void configure_gpio(void)
 	}
 }
 
+/* ========================================================================== */
+/*  main()                                                                    */
+/* ========================================================================== */
+
 int main(void)
 {
 	int blink_status = 0;
@@ -752,11 +687,13 @@ int main(void)
 
 	configure_gpio();
 
+	/* ---- UART init (serial terminal always works) ---- */
 	err = uart_init();
 	if (err) {
 		error();
 	}
 
+	/* ---- BLE security callbacks (optional) ---- */
 	if (IS_ENABLED(CONFIG_BT_NUS_SECURITY_ENABLED)) {
 		err = bt_conn_auth_cb_register(&conn_auth_callbacks);
 		if (err) {
@@ -771,13 +708,13 @@ int main(void)
 		}
 	}
 
+	/* ---- BLE init ---- */
 	err = bt_enable(NULL);
 	if (err) {
 		error();
 	}
 
 	LOG_INF("Bluetooth initialized");
-
 	k_sem_give(&ble_init_ok);
 
 	if (IS_ENABLED(CONFIG_SETTINGS)) {
@@ -790,54 +727,55 @@ int main(void)
 		return 0;
 	}
 
+	/* ---- Start BLE advertising ---- */
 	k_work_init(&adv_work, adv_work_handler);
 	advertising_start();
 
-	/* Initialize BME280 sensor */
-
-	i2c_dev= DEVICE_DT_GET(I2C_DEV);
+	/* ---- I2C bus init ---- */
+	i2c_dev = DEVICE_DT_GET(I2C_DEV);
 	if (!device_is_ready(i2c_dev)) {
 		LOG_ERR("I2C device not ready");
-	}
-	else {
+	} else {
 		LOG_INF("I2C device ready");
-		//err= tca_init()
-		if (err) {
-			LOG_ERR("Failed to initialize TCA9548A multiplexer");
-		} else {
-			LOG_INF("TCA9548A multiplexer initialized");
-		}
 	}
 
+	/* ---- BME280 sensor init ---- */
 	bme280_dev = DEVICE_DT_GET(BME280_SENSOR);
 	if (!device_is_ready(bme280_dev)) {
-		LOG_WRN("BME280 not ready (check wiring/devicetree)");
+		LOG_WRN("BME280 not ready (check wiring / devicetree)");
+		printk("WARNING: BME280 sensor not detected!\r\n");
 	} else {
+		LOG_INF("BME280 sensor ready, starting periodic readings");
+		printk("BME280 sensor ready\r\n");
 		k_work_init_delayable(&bme280_work, bme280_work_handler);
 		k_work_schedule(&bme280_work, K_SECONDS(1));
 	}
 
+	/* ---- Main loop: blink LED to show firmware is alive ---- */
 	for (;;) {
 		dk_set_led(RUN_STATUS_LED, (++blink_status) % 2);
 		k_sleep(K_MSEC(RUN_LED_BLINK_INTERVAL));
 	}
 
 	return 0;
-	
 }
+
+/* ========================================================================== */
+/*  BLE write thread: UART serial → BLE NUS (bridge)                         */
+/* ========================================================================== */
 
 void ble_write_thread(void)
 {
 	/* Don't go any further until BLE is initialized */
 	k_sem_take(&ble_init_ok, K_FOREVER);
+
 	struct uart_data_t nus_data = {
 		.len = 0,
 	};
 
 	for (;;) {
 		/* Wait indefinitely for data to be sent over bluetooth */
-		struct uart_data_t *buf = k_fifo_get(&fifo_uart_rx_data,
-						     K_FOREVER);
+		struct uart_data_t *buf = k_fifo_get(&fifo_uart_rx_data, K_FOREVER);
 
 		int plen = MIN(sizeof(nus_data.data) - nus_data.len, buf->len);
 		int loc = 0;
@@ -848,8 +786,8 @@ void ble_write_thread(void)
 			loc += plen;
 
 			if (nus_data.len >= sizeof(nus_data.data) ||
-			   (nus_data.data[nus_data.len - 1] == '\n') ||
-			   (nus_data.data[nus_data.len - 1] == '\r')) {
+			    (nus_data.data[nus_data.len - 1] == '\n') ||
+			    (nus_data.data[nus_data.len - 1] == '\r')) {
 				if (bt_nus_send(NULL, nus_data.data, nus_data.len)) {
 					LOG_WRN("Failed to send data over BLE connection");
 				}
