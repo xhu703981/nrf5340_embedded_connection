@@ -60,8 +60,8 @@ LOG_MODULE_REGISTER(LOG_MODULE_NAME);
 #define UART_WAIT_FOR_RX CONFIG_BT_NUS_UART_RX_WAIT_TIME
 
 //I2C Multiplexer TCA9548A
-#define TCA9548A_ADDR 0x70
-#define number_of_channels 8
+// #define TCA9548A_ADDR 0x70
+// #define number_of_channels 8
 #define BME280_I2C_ADDR 0x76
 
 #define BME280_SENSOR DT_INST(0, bosch_bme280)
@@ -115,82 +115,82 @@ UART_ASYNC_ADAPTER_INST_DEFINE(async_adapter);
 #define async_adapter NULL
 #endif
 
-static int tcca_select_channel(uint8_t channel)
-{
-	uint8_t config;
-	int err;
+// static int tcca_select_channel(uint8_t channel)
+// {
+// 	uint8_t config;
+// 	int err;
 
-	// if(!I2C_DEV) {
-	// 	LOG_ERR("I2C device not ready");
-	// 	return -ENODEV;
-	// }
+// 	// if(!I2C_DEV) {
+// 	// 	LOG_ERR("I2C device not ready");
+// 	// 	return -ENODEV;
+// 	// }
 
-	if (channel >= number_of_channels) {
-		return -EINVAL;
-	}
-	config = 1 << channel;
-	err = i2c_write(i2c_dev, &config, 1, TCA9548A_ADDR);
-	if (err) {
-		LOG_ERR("Failed to select TCA9548A channel %d (err %d)", channel, err);
-		return err;
-	}
-	k_sleep(K_MSEC(10)); //wait for the channel to switch
-	return 0;
-}
-static int disable_tcca_channels(void)
-{
-	uint8_t config = 0x00;
-	int err;
+// 	if (channel >= number_of_channels) {
+// 		return -EINVAL;
+// 	}
+// 	config = 1 << channel;
+// 	err = i2c_write(i2c_dev, &config, 1, TCA9548A_ADDR);
+// 	if (err) {
+// 		LOG_ERR("Failed to select TCA9548A channel %d (err %d)", channel, err);
+// 		return err;
+// 	}
+// 	k_sleep(K_MSEC(10)); //wait for the channel to switch
+// 	return 0;
+// }
+// static int disable_tcca_channels(void)
+// {
+// 	uint8_t config = 0x00;
+// 	int err;
 
-	// if(!I2C_DEV) {
-	// 	LOG_ERR("I2C device not ready");
-	// 	return -ENODEV;
-	// }
+// 	// if(!I2C_DEV) {
+// 	// 	LOG_ERR("I2C device not ready");
+// 	// 	return -ENODEV;
+// 	// }
 
-	err = i2c_write(i2c_dev, &config, 1, TCA9548A_ADDR);
-	if (err) {
-		LOG_ERR("Failed to disable TCA9548A channels (err %d)", err);
-		return err;
-	}
-	k_sleep(K_MSEC(10)); //wait for the channel to switch
-	return 0;
-}
+// 	err = i2c_write(i2c_dev, &config, 1, TCA9548A_ADDR);
+// 	if (err) {
+// 		LOG_ERR("Failed to disable TCA9548A channels (err %d)", err);
+// 		return err;
+// 	}
+// 	k_sleep(K_MSEC(10)); //wait for the channel to switch
+// 	return 0;
+// }
 
-static int tca_init(void)
-{
-	int err;
-	uint8_t chip_id;
-	uint8_t reg_addr = 0xD0;
+// static int tca_init(void)
+// {
+// 	int err;
+// 	uint8_t chip_id;
+// 	uint8_t reg_addr = 0xD0;
 
-	err = disable_tcca_channels();
-	if (err) {
-		LOG_ERR("Failed to initialize TCA9548A");
-		return err;
-	}
+// 	err = disable_tcca_channels();
+// 	if (err) {
+// 		LOG_ERR("Failed to initialize TCA9548A");
+// 		return err;
+// 	}
 
-	for(int ch = 0; ch < number_of_channels; ch++) {
-		err = tcca_select_channel(ch);
-		if (err) {
-			return err;
-		}
+// 	for(int ch = 0; ch < number_of_channels; ch++) {
+// 		err = tcca_select_channel(ch);
+// 		if (err) {
+// 			return err;
+// 		}
 
-		//read BME280 chip ID
-		err = i2c_write_read(i2c_dev, BME280_I2C_ADDR, &reg_addr, 1, &chip_id, 1);
-		if (err) {
-			LOG_ERR("Failed to read BME280 chip ID on channel %d (err %d)", ch, err);
-			continue;
-		}
+// 		//read BME280 chip ID
+// 		err = i2c_write_read(i2c_dev, BME280_I2C_ADDR, &reg_addr, 1, &chip_id, 1);
+// 		if (err) {
+// 			LOG_ERR("Failed to read BME280 chip ID on channel %d (err %d)", ch, err);
+// 			continue;
+// 		}
 
-		if (chip_id == 0x60) {
-			LOG_INF("BME280 found on channel %d", ch);
-		} else {
-			LOG_WRN("Unexpected chip ID 0x%02X on channel %d", chip_id, ch);
-		}
-	}
+// 		if (chip_id == 0x60) {
+// 			LOG_INF("BME280 found on channel %d", ch);f
+// 		} else {
+// 			LOG_WRN("Unexpected chip ID 0x%02X on channel %d", chip_id, ch);
+// 		}
+// 	}
 
-	disable_tcca_channels();
-	return 0;
-}
+// 	disable_tcca_channels();
+// 	return 0;
+// }
 
 static void uart_cb(const struct device *dev, struct uart_event *evt, void *user_data)
 {
@@ -452,72 +452,43 @@ static void adv_work_handler(struct k_work *work)
 //work handler for BME280 sensor reading
 static void bme280_work_handler(struct k_work *work)
 {
-	int err;
-	struct sensor_value temp, hum, press;
-	char nus_msg[64];
-	int nus_msg_len;
-	int total_len = 0;
+    int err;
+    struct sensor_value temp, hum, press;
+    char nus_msg[96];
+    int len;
 
-	if (!current_conn) {
-		/* No connection, skip reading */
-		k_work_reschedule(&bme280_work, K_SECONDS(5));
-		return;
-	}
-	for (uint8_t ch = 0; ch < number_of_channels; ch++) {
-		// Select the multiplexer channel
-		err = tcca_select_channel(ch);
-		if (err) {
-			LOG_ERR("Failed to select channel %d (err %d)", ch, err);
-			continue;
-		}
+    err = sensor_sample_fetch(bme280_dev);
+    if (err) {
+        LOG_ERR("sensor_sample_fetch failed (err %d)", err);
+        k_work_reschedule(&bme280_work, K_MSEC(500));
+        return;
+    }
 
-		// Fetch sensor data
-		err = sensor_sample_fetch(bme280_dev);
-		if (err) {
-			LOG_ERR("Failed to fetch sample from BME280 on channel %d (err %d)", 
-				ch, err);
-			continue;
-		}
+    sensor_channel_get(bme280_dev, SENSOR_CHAN_AMBIENT_TEMP, &temp);
+    sensor_channel_get(bme280_dev, SENSOR_CHAN_HUMIDITY, &hum);
+    sensor_channel_get(bme280_dev, SENSOR_CHAN_PRESS, &press);
 
-		// Get sensor readings
-		sensor_channel_get(bme280_dev, SENSOR_CHAN_AMBIENT_TEMP, &temp);
-		sensor_channel_get(bme280_dev, SENSOR_CHAN_HUMIDITY, &hum);
-		sensor_channel_get(bme280_dev, SENSOR_CHAN_PRESS, &press);
+    printk("Temp: %.2f C, Hum: %.2f %%, Press: %.6f hPa\n",
+           sensor_value_to_double(&temp),
+           sensor_value_to_double(&hum),
+           sensor_value_to_double(&press) / 100.0);
 
-		printk("Sensor %d - Temp: %d.%02d°C, Hum: %d.%02d%%, Pres: %d.%02d hPa\n",
-			ch,
-			temp.val1, abs(temp.val2 / 10000),
-			hum.val1, abs(hum.val2 / 10000),
-			(int)(press.val1 / 100), abs((press.val1 % 100)));
+    len = snprintk(nus_msg, sizeof(nus_msg),
+                   "T=%.2fC H=%.2f%% P=%.6fhPa\r\n",
+                   sensor_value_to_double(&temp),
+                   sensor_value_to_double(&hum),
+                   sensor_value_to_double(&press) / 100.0);
 
-		// Format sensor data for BLE transmission
-		nus_msg_len = snprintk(&nus_msg[total_len], sizeof(nus_msg) - total_len,
-				      "S%d: T=%.2f°C H=%.2f%% P=%.2fhPa\r\n",
-				      ch,
-				      sensor_value_to_double(&temp),
-				      sensor_value_to_double(&hum),
-				      sensor_value_to_double(&press) / 100.0);
+    if (current_conn && len > 0) {
+        err = bt_nus_send(NULL, (uint8_t *)nus_msg, len);
+        if (err) {
+            LOG_WRN("bt_nus_send failed (err %d)", err);
+        }
+    }
 
-		if (nus_msg_len > 0 && (total_len + nus_msg_len) < sizeof(nus_msg)) {
-			total_len += nus_msg_len;
-		}
-	}
-
-	// Disable all channels after reading
-	disable_tcca_channels();
-
-	// Send all sensor data over BLE
-	if (total_len > 0) {
-		err = bt_nus_send(NULL, (uint8_t *)nus_msg, total_len);
-		if (err) {
-			LOG_WRN("Failed to send sensor data over BLE (err %d)", err);
-		}
-	}
-
-	// Schedule next reading
-	k_work_reschedule(&bme280_work, K_SECONDS(5));
-	
+    k_work_reschedule(&bme280_work, K_MSEC(500));
 }
+
 
 static void advertising_start(void)
 {
@@ -830,7 +801,7 @@ int main(void)
 	}
 	else {
 		LOG_INF("I2C device ready");
-		err= tca_init();
+		//err= tca_init()
 		if (err) {
 			LOG_ERR("Failed to initialize TCA9548A multiplexer");
 		} else {
