@@ -320,7 +320,7 @@ static void bme280_work_handler(struct k_work *work)
     sensor_channel_get(bme280_dev, SENSOR_CHAN_PRESS, &press);
 
     // pressure: sensor returns Pa, divide by 100 to get hPa
-    double press_hpa = sensor_value_to_double(&press) / 100.0;
+    double press_hpa = sensor_value_to_double(&press) *10.0;
 
     printk("T=%.2fC H=%.2f%% P=%.2fhPa\n",
            sensor_value_to_double(&temp),
